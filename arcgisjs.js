@@ -200,7 +200,7 @@
             Confidence=0.20;
         }
        var colors = [
-            [0, 108, 0,Confidence],//0green
+            [0, 255, 0,Confidence],//0green
             [255,255,0,Confidence],//1yellow
             [255, 127, 0,Confidence],//2red
 	    [255, 0, 0,Confidence] //3red
