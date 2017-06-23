@@ -1,87 +1,177 @@
 <html>
-    <head>
-        <title>Trial ArcGIS Application</title>  <!-- Title of webpage-->
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <!--<a href="../Desktop/Google Maps/mgrs/grid_mgrs.kmz.php"></a>-->
-        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">   
-	    <!-- reference links for ESRI -->
-        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
-        <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
-        <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">       
-        <style>
-            html,body {
-                height:100%;
-                width:100%;
-                margin:0;
-                padding:0;
-            }
-            body {
-                background-color:#FFF;           
-                overflow:hidden;
-                font-family:"Helvetica";
-            }
-            html, body { height: 100%; width: 100%; margin: 0; overflow: hidden; }
-            #map { height: 100%; padding: 0;}  
-            #appLayout {
-                height: 100%;
-                padding: 0px;
-            }
-        </style>          
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-        <script src="https://js.arcgis.com/3.20/"></script>
-        
-    </head>
-    <body class="claro"> 
-        <div id="appLayout"  data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline'" style="font-weight: bold;padding: 0px;">
-            <div  data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'" style="padding: 0px;">
-                <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline'" style="font-weight: bold;padding: 0px;">
-                    <div id="mapDiv" class="roundedCorners shadow" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
-                        
-                    </div>                  
-                </div>
-            </div>
-            <div  data-dojo-type="dijit/layout/ContentPane" data-dojo-props="minSize:1,maxSize:300,region: 'left', splitter:true,title:'Layers & Tools'"  style="width: 300px">
-               <!--User display form for input-->
-                <table style="width: 100%; height: 100px;">
-                    <tr>
-                        <td>Latitude</td>
-                        <td><input id="txtLat" placeholder="Enter latitude" type="text" value="39.10"></td>
-                    </tr>
-                    <tr>
-                        <td>Longitude</td>
-                        <td><input id="txtLong" placeholder="Enter longitude" type="text" value="-77.28"></td>
-                    </tr>
-                    <tr>
-                        <td>Time</td>
-                        <td><input id="time" type="time" value="23:00"></td>
-                    </tr>
-                    <tr>
-                        <td>Date</td>
-                        <td><input id="date" type="date" value="2017-01-01"></td>
-                    </tr>
-                    <tr>
-                        <td>Radius(in Meters)</td>
-                        <td><input id="txtRadius" placeholder="Enter Buffer Radius" type="text" value="300"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <hr> 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">                            
-                            <input value="Submit" id="btnBuffer" type="submit">
-                            
-                        </td>
-                        
-                    </tr>
-                    
-                </table>
-            </div> 
-        </div>             
-        <script>
-          [a reletive link](arcgisjs.js)
-              </script>
-    </body>   
+   <head>
+       <title>Trial ArcGIS Application</title>  <!-- Title of webpage-->
+       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+       <!--<a href="../Desktop/Google Maps/mgrs/grid_mgrs.kmz.php"></a>-->
+       <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">   
+           <!-- reference links for ESRI -->
+       <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/redmond/jquery-ui.min.css">
+       <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
+       <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">       
+       <style>
+           html,body {
+               height:100%;
+               width:100%;
+               margin:0;
+               padding:0;
+           }
+           body {
+               background-color:#FFF;           
+               overflow:hidden;
+               font-family:"Helvetica";
+           }
+           html, body { height: 100%; width: 100%; margin: 0; overflow: hidden; }
+           #map { height: 100%; padding: 0;}  
+           #appLayout {
+               height: 100%;
+               padding: 0px;
+           }
+       </style>          
+       <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+       <script src="https://js.arcgis.com/3.20/"></script>
+       <script language ="javascript">
+   
+   function checkLat() {
+   var inputVal = document.getElementById("txtLat");
+   if (inputVal.value >= -90 && inputVal.value <= 90 && inputVal.value != 0 ) {
+       inputVal.style.backgroundColor = "";
+       $("#btnBuffer").show();
+   }
+   else{
+       inputVal.style.backgroundColor = "#ff9999";
+       $("#btnBuffer").hide();
+       }
+   }
+       
+   function checkLong() {
+   var inputVal = document.getElementById("txtLong");
+   if (inputVal.value >= -180 && inputVal.value <= 180 && inputVal.value != 0 ) {
+       inputVal.style.backgroundColor = "";
+       $("#btnBuffer").show();
+   }
+   else{
+       inputVal.style.backgroundColor = "#ff9999";
+       $("#btnBuffer").hide();
+       }
+   }
+
+   function checkRad() {
+   var inputVal = document.getElementById("txtRadius");
+   if (inputVal.value >= 100 && inputVal.value <= 5000) {
+       inputVal.style.backgroundColor = "";
+       $("#btnBuffer").show();
+   }
+   else{
+       inputVal.style.backgroundColor = "#ff9999";
+       $("#btnBuffer").hide();
+       }
+   }
+   
+       </script>
+   </head>
+   <body class="claro"> 
+    
+     
+       <div id="appLayout"  data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline'" style="font-weight: bold;padding: 0px;">
+           <div  data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'" style="padding: 0px;">
+               <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline'" style="font-weight: bold;padding: 0px;">
+                   <div id="mapDiv" class="roundedCorners shadow" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'">
+                       
+                   </div>                  
+               </div>
+           </div>
+         
+           <div  data-dojo-type="dijit/layout/ContentPane" data-dojo-props="minSize:1,maxSize:300,region: 'left', splitter:true,title:'Layers & Tools'"  style="width: 300px">
+              <!--User display form for input-->
+             
+               <table style="width: 100%; height: 100px;">
+                   <tr>
+                       <td>Latitude</td>
+                       <td><input id="txtLat" placeholder="Enter latitude" type="text"  onblur = "checkLat()"></td>
+                   </tr>
+                   <tr>
+                       <td>Longitude</td>
+                       <td><input id="txtLong" placeholder="Enter longitude" type="text" value="-77.28" onblur = "checkLong()"></td>
+                   </tr>
+                   <tr>
+                       <td>Time</td>
+                       <td><select name="Zone"> 
+   <option value="Eastern TimeT">Eastern Time</option>
+   <option value="Central Time">Central Time</option>
+   <option value="Pacific Time">Pacific Time</option>
+   <option value="Indian Standard Time">Indian Standard Time</option>
+           </select> Zone
+           <select name="Hours"> 
+   <option value="00">00</option>
+   <option value="01">01</option>
+   <option value="02">02</option>
+   <option value="03">03</option>
+   <option value="04">04</option>
+   <option value="05">05</option>
+   <option value="06">06</option>
+   <option value="07">07</option>
+   <option value="08">08</option>
+   <option value="09">09</option>
+   <option value="10">10</option>
+   <option value="11">11</option>
+   <option value="12">12</option>
+   <option value="13">13</option>
+   <option value="14">14</option>
+   <option value="15">15</option>
+   <option value="16">16</option>
+   <option value="17">17</option>
+   <option value="18">18</option>
+   <option value="19">19</option>
+   <option value="20">20</option>
+   <option value="21">21</option>
+   <option value="24">24</option>
+           </select> Hr
+           <select name="Minutes"> 
+   <option value="00">00</option>
+   <option value="05">05</option>
+   <option value="10">10</option>
+   <option value="15">15</option>
+   <option value="20">20</option>
+   <option value="25">25</option>
+   <option value="30">30</option>
+   <option value="35">35</option>
+   <option value="40">40</option>
+   <option value="45">45</option>
+   <option value="50">50</option>
+   <option value="55">55</option>
+           </select> min
+           <br>
+</td>
+                   </tr>
+                   <tr>
+                       <td>Date</td>
+                       <td><input id="date" type="date" value="2017-01-01"></td>
+                   </tr>
+                   <tr>
+                       <td>Radius(in Meters)</td>
+                       <td><input id="txtRadius" placeholder="Enter Buffer Radius" type="text" value="300" onblur = "checkRad()"></td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">
+                           <hr> 
+                       </td>
+                   </tr>
+                   <tr>
+                       <td colspan="2">                            
+                           <input value="Submit" id="btnBuffer" type="submit">
+                           
+                       </td>
+                       
+                   </tr>
+                   
+               </table>
+           
+           </div> 
+       </div>
+      
+     <script>
+        [a reletive link](arcgisjs.js)
+             </script>
+   </body>   
 </html>
