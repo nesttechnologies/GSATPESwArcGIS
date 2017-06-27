@@ -38,8 +38,8 @@
       var gridArray=[];
      
   var bufferSymb = new SimpleFillSymbol(SimpleFillSymbol.STYLE_NULL,
-          new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,new Color([105, 105, 255]),2), new Color([255, 255, 0, 0.25]));
-  var gridSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,new Color([255, 122, 0]),2), new Color([255, 122, 0, 0.5]));
+          new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,new Color([105, 105, 255,1]),1), new Color([255, 255, 0]));
+  var gridSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,new Color([255, 122,0]),2), new Color([255, 122, 0, 0]));
   var bufferGeom=null;
   var count =0;
   $("#btnBuffer").click(function(){  
