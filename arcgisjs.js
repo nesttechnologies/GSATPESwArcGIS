@@ -42,11 +42,23 @@
   var gridSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,new Color([255, 122,0]),2), new Color([255, 122, 0, 0]));
   var bufferGeom=null;
   var count =0;
-  $("#btnBuffer").click(function(){  
-                  var point;
-                  if(count > 0){ 
-                          start();
-                  }            
+$("#btnBuffer").click(function(){ 
+         //wkluczila kotik
+         
+               var lat = document.getElementById("txtLat").value;
+               var longt = document.getElementById("txtLong").value;
+               //http://localhost:55340/Home/GetLatLongToUTM?lat=-55&longt=-89
+               var apiUrl = 'http://localhost:57597/Home/GetLatLongToUTM?'
+                   $.get(apiUrl+'lat='+lat+'&longt='+longt)
+        .done(function (data) {
+            // On success, 'data' contains a list of products.
+           debugger;
+        }); 
+   		var point;
+   		if(count > 0){ 
+   			start();        
+   		}          
+ 
       var xLong=Number($("#txtLong").val());
       var yLat=Number($("#txtLat").val());                   
      //var point = new Point([-77.468,38.854],new SpatialReference({ wkid:4326 }));
